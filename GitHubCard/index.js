@@ -110,9 +110,6 @@ const followersArray = [
   'bigknell'
 ];
 
-
-
-
 const cards = document.querySelector('.cards');
 
 followersArray.forEach((uname) => {
@@ -121,7 +118,6 @@ axios
   .then((res) => {
     console.log('Here is the res: ', res);
         cards.appendChild(userPull(res));
-        console.log(res.data);
       })
       .catch((err) => {
         console.log('There was an error: ', err)
