@@ -27,7 +27,7 @@ Using that array, iterate over it, requesting data for each user, creating a new
 user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+
 
 /*
 STEP 3: Create a function that accepts a single object as its only argument.
@@ -78,31 +78,52 @@ function userPull(obj) {
   
   //styling
   card.classList.add('card');
-  cardInfo.classList('card-info');
+  cardInfo.classList.add('card-info');
   name.classList.add('name');
   userName.classList.add('username');
   
   //programattically update content
-  userImg.src = res.message.data;
-  name.textContent = path
+  userImg.src = obj.data.avatar_url;
+  name.textContent = obj.data.name;
+  userName.textContent = 'Username: ' + obj.data.login;
+  location.textContent = 'Location: ' + obj.data.location;
+  userUrl.href = obj.data.html_url;
+  userUrl.textContent = obj.data.html_url;
+  numFollowers.textContent = 'Followers: ' + obj.data.followers;
+  numFollowing.textContent = 'Following: ' + obj.data.following;
+  userBio.textContent = obj.data.bio;
+
+  return card;
+
 };
 
 
-/*
-List of LS Instructors Github username's:
-tetondan
-dustinmyers
-justsml
-luishrd
-bigknell
-*/
 
+// List of LS Instructors Github username's:
+
+const followersArray = [
+  'jekegren01', 
+  'tetondan',
+  'dustinmyers',
+  'justsml',
+  'luishrd',
+  'bigknell'
+];
+
+
+
+
+const cards = document.querySelector('.cards');
+
+followersArray.forEach((uname) => {
 axios
-  .get('https://api.github.com/users/jekegren01')
+  .get(`https://api.github.com/users/${uname}`)
   .then((res) => {
-      console.log('Here is the res: ', res);
-      cards.appendChild(userPull(res));
-    })
-  .catch((err) => {
-    console.log('There was an error: ', err)
-  });
+    console.log('Here is the res: ', res);
+        cards.appendChild(userPull(res));
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log('There was an error: ', err)
+      });
+    });
