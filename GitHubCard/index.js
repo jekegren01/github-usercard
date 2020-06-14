@@ -107,7 +107,8 @@ const followersArray = [
   'dustinmyers',
   'justsml',
   'luishrd',
-  'bigknell'
+  'bigknell',
+  'AHangstefer'
 ];
 
 const cards = document.querySelector('.cards');
